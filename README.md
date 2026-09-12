@@ -1,118 +1,214 @@
-🏋️ Gym Management System
-Project Overview
+# 24012011175: Gym Management System
 
-The Gym Management System is an Android application developed to manage the basic operations of a gym. The application provides a simple and user-friendly interface for managing gym members, membership plans, trainers, attendance, and payments.
+## AIM & Objective
 
-The project is developed using Android Studio, with Kotlin used for application logic, XML used for the user interface, and SQLite used for local data storage.
+To develop an Android application for managing gym members, membership plans, trainers, attendance, and payments. The application uses Kotlin and XML for development and SQLite for storing data locally.
 
-Objectives
-To develop a simple Android-based gym management application.
-To maintain member information digitally.
-To manage gym trainers and their details.
-To record member attendance.
-To maintain payment records.
-To provide different membership plans.
-To display important gym information through a dashboard.
-To store data permanently using SQLite.
-Features
-User Login
-Dashboard
-Member Management
-Membership Plans
-Trainer Management
-Attendance Management
-Payment Management
-SQLite Database
-Data Persistence
-Input Validation
-Activity Navigation
-Light and Dark Mode Support
-Technologies Used
-Android Studio – Development environment
-Kotlin – Programming language
-XML – User interface design
-SQLite – Local database
-SQLiteOpenHelper – Database management
-Intent – Navigation between activities
-Application Modules
-1. Login Module
+---
 
-The Login module provides a basic login interface where the user enters an email and password.
+# Output Screenshots
 
-The application checks whether the fields are empty. If both fields contain data, the user is redirected to the Dashboard.
+<table>
+<tr>
+<td align="center">
 
-2. Dashboard Module
+### Login
 
-The Dashboard acts as the main screen of the application.
+<img src="Screenshot/Login.png" width="220">
 
-It displays:
+</td>
+
+<td align="center">
+
+### Dashboard
+
+<img src="Screenshot/Dashboard.png" width="220">
+
+</td>
+
+<td align="center">
+
+### Member
+
+<img src="Screenshot/Member.png" width="220">
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+### Membership
+
+<img src="Screenshot/Membership.png" width="220">
+
+</td>
+
+<td align="center">
+
+### Trainer
+
+<img src="Screenshot/Trainer.png" width="220">
+
+</td>
+
+<td align="center">
+
+### Attendance
+
+<img src="Screenshot/Attendence.png" width="220">
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+### Payment
+
+<img src="Screenshot/Payment.png" width="220">
+
+</td>
+
+<td></td>
+<td></td>
+</tr>
+</table>
+
+---
+
+# Application Logic
+
+## 1. Login Navigation
+
+The application uses an **Explicit Intent** to navigate from the Login screen to the Dashboard.
+```kotlin
+val intent = Intent(
+    this,
+    DashboardActivity::class.java
+)
+
+startActivity(intent)
+finish()
+MainActivity: Used as the Login screen.
+DashboardActivity: Opens after successful login.
+Explicit Intent: Used to start a specific activity.
+```
+
+## 2. Dashboard
+
+The Dashboard displays important information about the gym.
+```kotlin
+It shows:
 
 Total Members
 Active Members
 Total Trainers
 Attendance Records
 
-It also provides buttons to navigate to all major modules.
+The values are retrieved dynamically from the SQLite database.
 
-The dashboard counts are retrieved dynamically from the SQLite database.
+memberCount.text =
+    "👥\n\n${databaseHelper.getMemberCount()}\nMembers"
 
-3. Member Management
+activeCount.text =
+    "💳\n\n${databaseHelper.getActiveMemberCount()}\nActive"
 
-The Member Management module allows the user to add and view gym members.
+trainerCount.text =
+    "🏋️\n\n${databaseHelper.getTrainerCount()}\nTrainers"
 
-Member information includes:
+attendanceCount.text =
+    "📋\n\n${databaseHelper.getAttendanceCount()}\nAttendance"
 
-Member ID
-Name
+The Dashboard also provides navigation to all major modules.
+```
+
+## 3. Member Management
+
+The Member Management module allows the user to add and view gym member details.
+```kotlin
+The following information is stored:
+
+Member Name
 Phone Number
 Email
 Membership Plan
+val success = databaseHelper.addMember(
+    name,
+    phone,
+    email,
+    plan
+)
 
-The information is stored in the members table.
-
-4. Membership Plans
+The member information is stored in the members table.
+```
+## 4. Membership Plans
 
 The application provides three membership plans:
+```kotlin
+Plan	Price
+Monthly	₹999
+Quarterly	₹2499
+Yearly	₹7999
 
-Monthly – ₹999
-Quarterly – ₹2499
-Yearly – ₹7999
+Users can select a membership plan from the Membership screen.
 
-Users can select a plan from the Membership screen.
+btnMonthly.setOnClickListener {
+    Toast.makeText(
+        this,
+        "Monthly Plan Selected",
+        Toast.LENGTH_SHORT
+    ).show()
+}
 
-5. Trainer Management
+Similar actions are provided for Quarterly and Yearly plans.
+```
+## 5. Trainer Management
 
-The Trainer Management module allows the user to add and view trainer information.
+The Trainer Management module allows the user to add and view trainer details.
+```kotlin
+The following information is maintained:
 
-Trainer details include:
-
-Trainer ID
-Name
+Trainer Name
 Phone Number
 Email
 Specialization
 Experience
+val success = databaseHelper.addTrainer(
+    name,
+    phone,
+    email,
+    spec,
+    exp
+)
 
-The information is stored in the trainers table.
-
-6. Attendance Management
+The trainer information is stored in the trainers table.
+```
+## 6. Attendance Management
 
 The Attendance module allows the user to record member attendance.
-
-The available statuses are:
+```kotlin
+The available options are:
 
 Present
 Absent
+val status =
+    if (present.isChecked) "Present"
+    else "Absent"
+
+databaseHelper.addAttendance(
+    name,
+    status
+)
 
 Attendance records are stored in the attendance table.
+```
+## 7. Payment Management
 
-7. Payment Management
+The Payment module allows the user to record member payment details.
+```kotlin
+The payment information includes:
 
-The Payment module allows the user to record member payments.
-
-Payment information includes:
-
-Payment ID
 Member Name
 Amount
 Payment Status
@@ -121,68 +217,144 @@ Payment status can be:
 
 Paid
 Pending
+val status =
+    if (paid.isChecked) "Paid"
+    else "Pending"
 
-The information is stored in the payments table.
+databaseHelper.addPayment(
+    name,
+    paymentAmount,
+    status
+)
 
-Database
+Payment records are stored in the payments table.
+```
 
-The application uses a local SQLite database named GymDatabase.
+# Database Implementation
 
-The database contains four main tables:
+The application uses SQLite through the DatabaseHelper.kt class.
+```kotlin
+class DatabaseHelper(context: Context) :
+    SQLiteOpenHelper(context, "GymDatabase", null, 3)
+
+The database contains four tables.
 
 Members Table
-
-Stores member information.
-
 id
 name
 phone
 email
 membership
+
 Trainers Table
-
-Stores trainer information.
-
 id
 name
 phone
 email
 specialization
 experience
+
 Attendance Table
-
-Stores attendance records.
-
 id
 member_name
 status
+
 Payments Table
-
-Stores payment records.
-
 id
 member_name
 amount
 status
-DatabaseHelper
+```
 
-DatabaseHelper.kt is responsible for managing the SQLite database.
+# Database Logic
 
-It extends the Android SQLiteOpenHelper class.
+DatabaseHelper.kt extends SQLiteOpenHelper and is responsible for creating and managing the SQLite database.
+```kotlin
+The database helper provides functions to:
 
-Its responsibilities include:
+Add members
+Retrieve members
+Add trainers
+Retrieve trainers
+Save attendance
+Retrieve attendance
+Save payments
+Retrieve payments
+Calculate dashboard counts
+Application Flow
+Login
+   ↓
+Dashboard
+   ↓
+ ┌───────────────┬──────────────────┬──────────────┐
+ ↓               ↓                  ↓              ↓
+Members      Membership         Trainers      Attendance
+                                                   ↓
+                                               Payments
 
-Creating database tables
-Handling database upgrades
-Inserting member records
-Retrieving member records
-Inserting trainer records
-Retrieving trainer records
-Saving attendance records
-Retrieving attendance records
-Saving payment records
-Retrieving payment records
-Calculating dashboard counts
+UI Implementation Details
+
+Platform: Android
+IDE: Android Studio
+Programming Language: Kotlin
+UI Design: XML
+
+Database: SQLite
+Database Helper: SQLiteOpenHelper
+Navigation: Explicit Intent
+User Feedback: Toast Messages
+Theme: DayNight
+Mode: Light and Dark Mode
+
+Android Concepts Used
+Activities
+Activity Lifecycle
+onCreate()
+onResume()
+
+XML Layouts
+Views and Widgets
+Explicit Intent
+Toast Messages
+Input Validation
+
+SQLite Database
+SQLiteOpenHelper
+ContentValues
+Cursor
+
+SQL Queries
+DayNight Theme
+Data Persistence
+Data Persistence
+
+The application uses SQLite for local data persistence.
+
+Records added by the user are stored in the local database and remain available when the application is opened again.
+
+Testing
+
+The following features were tested successfully:
+
+Login validation
+Dashboard navigation
+Member addition
+Member data retrieval
+Membership plan selection
+
+Trainer addition
+Trainer data retrieval
+
+Attendance recording
+
+Payment recording
+
+Dashboard count updates
+SQLite data persistence
+
+Light and Dark Mode
+Navigation between activities
+
 Project Structure
 Gym Management System
 │
@@ -195,6 +367,15 @@ Gym Management System
 ├── PaymentActivity.kt
 ├── DatabaseHelper.kt
 │
+├── Screenshot
+│   ├── Login.png
+│   ├── Dashboard.png
+│   ├── Attendence.png
+│   ├── Member.png
+│   ├── Membership.png
+│   ├── Payment.png
+│   └── Trainer.png
+│
 └── res
     └── layout
         ├── activity_main.xml
@@ -204,102 +385,12 @@ Gym Management System
         ├── activity_trainer.xml
         ├── activity_attendance.xml
         └── activity_payment.xml
-Application Flow
-Login
-  ↓
-Dashboard
-  ↓
- ├── Members
- ├── Membership Plans
- ├── Trainers
- ├── Attendance
- └── Payments
-Data Flow
-User Input
-    ↓
-Activity
-    ↓
-DatabaseHelper
-    ↓
-SQLite Database
-    ↓
-Retrieve Data
-    ↓
-Display on Screen
-Android Concepts Used
 
-The project demonstrates several important Android concepts:
+```
+# Conclusion
 
-Activities
-Activity Lifecycle
-onCreate()
-onResume()
-XML Layouts
-Views and Widgets
-Explicit Intents
-Toast Messages
-Input Validation
-SQLite Database
-SQLiteOpenHelper
-ContentValues
-Cursor
-SQL Queries
-DayNight Theme
-Data Persistence
+Successfully developed an Android-based Gym Management System using Kotlin, XML, and SQLite.
 
-The application uses SQLite for local data persistence. Records added by the user remain stored in the database and can be retrieved when the application is opened again.
+The application provides a simple interface for managing members, membership plans, trainers, attendance, and payments. Data is stored locally using SQLite, while Explicit Intents are used for navigation between different activities.
 
-Dark Mode
-
-The application supports light and dark mode using a DayNight-compatible theme.
-
-Theme attributes such as colorBackground, textColorPrimary, and textColorSecondary are used to make the interface adapt to the selected device theme.
-
-Testing
-
-The following features were tested successfully:
-
-Login validation
-Dashboard navigation
-Member addition
-Member data retrieval
-Trainer addition
-Trainer data retrieval
-Attendance recording
-Payment recording
-Membership plan selection
-Dashboard count updates
-Data persistence
-Light/Dark mode
-Navigation between activities
-Limitations
-
-The current version is a basic academic implementation. It does not currently include:
-
-Real online authentication
-Member update and delete operations
-Membership expiry tracking
-Cloud synchronization
-Online payment processing
-Role-based authentication
-Advanced reports
-Future Scope
-
-The application can be further improved by adding:
-
-Firebase or cloud database integration
-Secure user authentication
-Member update and delete functionality
-Membership expiry dates
-Automatic renewal reminders
-Search and filtering
-Online payment integration
-Admin and trainer roles
-Member profile management
-Reports and analytics
-Push notifications
-Conclusion
-
-The Gym Management System provides a simple solution for managing important gym operations through an Android application. The project demonstrates the practical use of Kotlin, XML, Android Activities, Intents, SQLite, database management, input validation, and Android lifecycle methods.
-
-The application provides a foundation that can be expanded with advanced features such as cloud storage, secure authentication, online payments, and detailed analytics.
+The application also supports data persistence and light/dark mode, providing a simple and user-friendly gym management solution.
