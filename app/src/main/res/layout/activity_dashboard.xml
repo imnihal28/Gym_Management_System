@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gym Dashboard"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Welcome to Gym Management System"
+            android:textSize="14sp"
+            android:textColor="#757575" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Overview"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/tvMemberCount"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="👥\n\n0\nMembers"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvActiveCount"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="💳\n\n0\nActive"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/tvTrainerCount"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="🏋️\n\n0\nTrainers"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvAttendanceCount"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="📋\n\n0\nAttendance"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="#FFFFFF" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="Management"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+        <Button
+            android:id="@+id/btnMembers"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:text="👥  Member Management" />
+
+        <Button
+            android:id="@+id/btnMembership"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:text="💳  Membership Plans" />
+
+        <Button
+            android:id="@+id/btnTrainers"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:text="🏋️  Trainer Management" />
+
+        <Button
+            android:id="@+id/btnAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:text="📋  Attendance" />
+
+        <Button
+            android:id="@+id/btnPayments"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="10dp"
+            android:text="💰  Payments" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="25dp"
+            android:text="LOGOUT" />
+
+    </LinearLayout>
+
+</ScrollView>
