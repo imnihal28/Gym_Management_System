@@ -240,16 +240,13 @@ class DatabaseHelper(context: Context) :
 The database contains four tables.
 
 Members Table
-
 id
 name
 phone
 email
 membership
 
-
 Trainers Table
-
 id
 name
 phone
@@ -257,16 +254,12 @@ email
 specialization
 experience
 
-
 Attendance Table
-
 id
 member_name
 status
 
-
 Payments Table
-
 id
 member_name
 amount
@@ -305,26 +298,31 @@ Platform: Android
 IDE: Android Studio
 Programming Language: Kotlin
 UI Design: XML
+
 Database: SQLite
 Database Helper: SQLiteOpenHelper
 Navigation: Explicit Intent
 User Feedback: Toast Messages
 Theme: DayNight
 Mode: Light and Dark Mode
+
 Android Concepts Used
 Activities
 Activity Lifecycle
 onCreate()
 onResume()
+
 XML Layouts
 Views and Widgets
 Explicit Intent
 Toast Messages
 Input Validation
+
 SQLite Database
 SQLiteOpenHelper
 ContentValues
 Cursor
+
 SQL Queries
 DayNight Theme
 Data Persistence
@@ -343,14 +341,20 @@ Dashboard navigation
 Member addition
 Member data retrieval
 Membership plan selection
+
 Trainer addition
 Trainer data retrieval
+
 Attendance recording
+
 Payment recording
+
 Dashboard count updates
 SQLite data persistence
+
 Light and Dark Mode
 Navigation between activities
+
 Project Structure
 Gym Management System
 │
@@ -383,13 +387,7 @@ Gym Management System
         └── activity_payment.xml
 
 ```
-Student Details
-
-Enrollment No: 24012011175
-
-Subject: Mobile Application Development (MAD)
-
-Conclusion
+# Conclusion
 
 Successfully developed an Android-based Gym Management System using Kotlin, XML, and SQLite.
 
