@@ -240,31 +240,43 @@ class DatabaseHelper(context: Context) :
 The database contains four tables.
 
 Members Table
+
 id
 name
 phone
 email
 membership
+
+
 Trainers Table
+
 id
 name
 phone
 email
 specialization
 experience
+
+
 Attendance Table
+
 id
 member_name
 status
+
+
 Payments Table
+
 id
 member_name
 amount
 status
-Database Logic
+```
+
+# Database Logic
 
 DatabaseHelper.kt extends SQLiteOpenHelper and is responsible for creating and managing the SQLite database.
-
+```kotlin
 The database helper provides functions to:
 
 Add members
@@ -286,7 +298,9 @@ Dashboard
 Members      Membership         Trainers      Attendance
                                                    ↓
                                                Payments
+
 UI Implementation Details
+
 Platform: Android
 IDE: Android Studio
 Programming Language: Kotlin
@@ -367,6 +381,8 @@ Gym Management System
         ├── activity_trainer.xml
         ├── activity_attendance.xml
         └── activity_payment.xml
+
+```
 Student Details
 
 Enrollment No: 24012011175
